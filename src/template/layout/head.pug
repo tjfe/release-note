@@ -1,0 +1,26 @@
+meta(charset="utf-8")
+meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
+
+if config.description
+  meta(name="description" content=config.description)
+if config.keywords
+meta(name="keywords" content=config.keywords)
+
+meta(name="renderer" content="webkit")
+meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+meta(http-equiv="Cache-Control" content="no-siteapp")
+meta(name="format-detection" content="telephone=no")
+meta(content="yes" name="apple-mobile-web-app-capable")
+
+block title
+  if config.title
+    title= config.title
+  else
+    title Terjoy Release Note
+
+link(rel="icon" href="favicon.png" type="image/png")
+
+if config.style
+  style!=style
+else
+  link(rel="stylesheet" href="md.css")

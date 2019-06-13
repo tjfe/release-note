@@ -1,2 +1,13 @@
-# release-note
-Site of release-note for terjoy systems.
+# Terjoy Pay System Release Note
+
+支付系统发布记录，由天骄支付团队进行维护。
+
+*******
+
+## 发布记录
+
+### v0.0.1
+
+> 发布时间：2019 年 6 月 13 日
+
+本次发布的版本为支付系统预生产环境。
