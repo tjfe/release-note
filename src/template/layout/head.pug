@@ -18,7 +18,10 @@ block title
   else
     title Terjoy Release Note
 
-link(rel="icon" href="favicon.png" type="image/png")
+if page
+  link(rel="icon" href="../favicon.png" type="image/png")
+else
+  link(rel="icon" href="favicon.png" type="image/png")
 
 if config.style
   style!=style
