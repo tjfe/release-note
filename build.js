@@ -15,6 +15,7 @@ const UglifyJS = require('uglify-js')
 const options = psargv(process.argv.slice(2))
 
 const distFolder = 'dist'
+const assetFolder = 'asset'
 
 if (!fs.existsSync(distFolder)) {
   fs.mkdirSync(distFolder)
@@ -35,6 +36,19 @@ function write(dest, content) {
   fs.writeFile(filepath, content, err => {
     if (err) throw err
     console.log(`${filepath} write successful!`)
+  })
+}
+
+function copy(src) {
+  const dest = path.join(distFolder, src)
+  const destFolder = path.dirname(dest)
+  if (!fs.existsSync(destFolder)) {
+    fs.mkdirSync(destFolder, {recursive: true})
+  }
+
+  fs.copyFile(src, dest, err => {
+    if (err) throw err
+    console.log(`copy ${src} to ${dest} successful!`)
   })
 }
 
@@ -61,8 +75,8 @@ fs.copyFileSync('favicon.png', `${distFolder}/favicon.png`)
 const indexCompiler = pug.compile(read('template/index.pug'), {
   filename: 'src/template/index.pug'
 })
-const listCompiler = pug.compile(read('template/list.pug'), {
-  filename: 'src/template/list.pug'
+const noteCompiler = pug.compile(read('template/note.pug'), {
+  filename: 'src/template/note.pug'
 })
 
 // style
@@ -90,8 +104,50 @@ if (config.style) {
   write('md.css', styleContent)
 }
 
+const list = []
+if (Array.isArray(config.list)) {
+  config.list = config.list.map(item => {
+    if (fs.existsSync(item.filepath)) {
+      item.detail = true
+      item.href = `note/${item.version}.html`
+      list.push(item)
+    }
+    return item
+  })
+}
+
 pugData.content = zmd(read('../README.md'))
 
-const indexContent = indexCompiler(pugData)
+const indexContent = indexCompiler({
+  ...pugData,
+  page: false
+})
 
 write('index.html', indexContent)
+
+list.forEach(item => {
+  const noteContent = noteCompiler({
+    ...pugData,
+    page: item,
+    content: zmd(read('../' + item.filepath))
+  })
+
+  write(`note/${item.version}.html`, noteContent)
+})
+
+function copyList(folder) {
+  const list = fs.readdirSync(folder)
+  list.forEach(item => {
+    const filepath = path.join(folder, item)
+    if (isDirectory(filepath)) {
+      copyList(filepath)
+    } else {
+      copy(filepath)
+    }
+  })
+}
+
+// copy assets
+if (fs.existsSync(assetFolder)) {
+  copyList(assetFolder)
+}

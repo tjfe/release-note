@@ -1,3 +1,27 @@
+# 样式文件直接写入 HTML 文件中
+style: false
 
+# 站点标题
+# 默认为 `Terjoy Release Note`
+title:
 
-name: 123
+# 站点描述
+description:
+
+# 站点关键字
+keywords:
+
+# 发版记录列表
+list:
+  -
+    # 发布时间，格式为 YYYY-MM-DD hh:mm:ss，后面的时分秒可以省略
+    date: "2019-06-13"
+    # 版本号
+    version: v0.0.1
+    # 本次发布的简要描述
+    description: 本次发布的版本为支付系统预生产环境。
+    # 发布描述的详细文件的路径
+    # 如果文件不存在，对应页面将不会进行生成
+    filepath: ./note/v0.0.1.md
+    # 是否在首页进行隐藏
+    hide: false

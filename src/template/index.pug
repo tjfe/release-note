@@ -1,4 +1,21 @@
 extends ./layout/core.pug
 
+block header
+  header
+    h1 TPRN 支付系统发布记录
+
 block content
-  != content
+  ul
+    if config.list && config.list.length > 0
+      each item in config.list
+        unless item.hide
+          li
+            div 发布版本：#{item.version}
+            div 发布时间：#{item.date}
+            if item.description
+              div 发布描述：#{item.description}
+            if item.detail
+              div
+                a(href=`${item.href}`) 详情
+    else
+      blockquote 暂无版本发布记录

@@ -1,0 +1,12 @@
+extends ./layout/core.pug
+
+block header
+  blockquote
+    ul
+      li 版本号：#{page.version}
+      li 发布时间：#{page.date}
+  .backhome
+    a(href="../") 返回
+
+block content
+  !=content
