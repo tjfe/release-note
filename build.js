@@ -136,7 +136,7 @@ list.forEach(item => {
 })
 
 function copyList(folder) {
-  const list = fs.readdirSync(folder)
+  const list = fs.readdirSync(folder).filter(item => item[0] !== '.')
   list.forEach(item => {
     const filepath = path.join(folder, item)
     if (isDirectory(filepath)) {
