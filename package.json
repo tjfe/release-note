@@ -11,17 +11,17 @@
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^9.6.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "clean-css": "^4.2.1",
     "crypto-js": "^3.1.9-1",
     "js-yaml": "^3.13.1",
     "less": "^3.9.0",
     "postcss": "^7.0.17",
-    "psargv": "0.0.4",
-    "pug": "^2.0.3",
-    "stylus": "^0.54.5",
-    "terjoy-api": "^1.1.2",
-    "uglify-js": "^3.6.0",
-    "zmdjs": "^0.1.0"
+    "psargv": "0.0.6",
+    "pug": "^3.0.0",
+    "stylus": "^0.54.8",
+    "terjoy-api": "^3.0.0",
+    "uglify-js": "^3.12.8",
+    "zmdjs": "^0.2.1"
   }
 }
